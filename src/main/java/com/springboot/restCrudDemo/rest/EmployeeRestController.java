@@ -28,11 +28,11 @@ public class EmployeeRestController {
 
     @GetMapping("/employees/{employeeId}")
     public Employee getEmployee(@PathVariable int employeeId){
-        Employee employee = employeeService.findById(employeeId);
-        if(employee == null){
-            throw new RuntimeException("Employee Id not found - "+ employeeId);
+        Object obj = employeeService.findById(employeeId);
+        if(obj instanceof Employee) {
+            return  (Employee) obj;
         }
-        return employee;
+        return null;
     }
 
     @PostMapping("/employees")

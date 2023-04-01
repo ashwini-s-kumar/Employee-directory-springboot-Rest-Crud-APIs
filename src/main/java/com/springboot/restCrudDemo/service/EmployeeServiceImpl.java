@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
@@ -20,6 +22,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     // So, switched from EmployeeDao to EmployeeService
     EmployeeDAO employeeDAO;
 
+    static final Logger log = Logger.getLogger("EmployeeServiceImpl.class.getName()");
+
     @Autowired
     public EmployeeServiceImpl(EmployeeRepository employeeRepository, EmployeeDAO employeeDAO){
         this.employeeRepository = employeeRepository;
@@ -28,15 +32,27 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public List<Employee> findAll() {
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        }catch (Exception e) {
+            log.severe("Exception in EmployeeServiceImpl.findById : " + e);
+        }
         return employeeRepository.findAll();
     }
 
     @Override
     public Employee findById(int id) {
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        }catch (Exception e) {
+            log.severe("Exception in EmployeeServiceImpl.findById : " + e);
+        }
         Optional<Employee> result =  employeeRepository.findById(id);
         Employee employee = null;
         if(result.isPresent()){
             employee = result.get();
+        }else {
+            throw new RuntimeException("Employee Id not found - "+ id);
         }
         return employee;
     }
