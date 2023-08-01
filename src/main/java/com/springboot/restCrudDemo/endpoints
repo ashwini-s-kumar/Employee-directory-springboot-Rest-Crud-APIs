@@ -1,9 +1,9 @@
-post http://localhost:8081/login
+1. post call  http://localhost:8081/login
     {
         "username":"mary",
         "password":"test123"
     }
 
 
-1. http://localhost:8081/api/employees
-2. http://localhost:8081/api/employees/1
+2. http://localhost:8081/api/employees
+3. http://localhost:8081/api/employees/1
