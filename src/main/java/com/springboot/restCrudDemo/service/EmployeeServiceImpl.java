@@ -1,6 +1,5 @@
 package com.springboot.restCrudDemo.service;
 
-import com.springboot.restCrudDemo.dao.EmployeeDAO;
 import com.springboot.restCrudDemo.dao.EmployeeRepository;
 import com.springboot.restCrudDemo.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +19,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     // not efficient - need DAO code implementation for each entity
     // So, switched from EmployeeDao to EmployeeService
-    EmployeeDAO employeeDAO;
+
 
     static final Logger log = Logger.getLogger("EmployeeServiceImpl.class.getName()");
 
     @Autowired
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, EmployeeDAO employeeDAO){
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository){
         this.employeeRepository = employeeRepository;
-        this.employeeDAO = employeeDAO;
     }
 
     @Override

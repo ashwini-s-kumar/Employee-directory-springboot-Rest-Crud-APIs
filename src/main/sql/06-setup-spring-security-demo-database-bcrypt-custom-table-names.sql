@@ -8,8 +8,9 @@ DROP TABLE IF EXISTS `members`;
 --
 
 CREATE TABLE `members` (
-  `user_id` varchar(50) NOT NULL,
-  `pw` char(68) NOT NULL,
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(50) NOT NULL,
+  `password` char(68) NOT NULL,
   `active` tinyint NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -26,17 +27,18 @@ CREATE TABLE `members` (
 
 INSERT INTO `members`
 VALUES
-('john','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q',1),
-('mary','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q',1),
-('susan','{bcrypt}$2a$10$qeS0HEh7urweMojsnwNAR.vcXJeXR1UcMRZ2WcGQl9YeuspUdgF.q',1);
+(1,'john','$2a$10$0Lxsjt64UrfDTxBhb8cQ.OBoGSaTjZz36FYPujvqu8oXoyxfuxjhK',1),
+(2,'mary','$2a$10$0Lxsjt64UrfDTxBhb8cQ.OBoGSaTjZz36FYPujvqu8oXoyxfuxjhK',1),
+(3,'susan','$2a$10$0Lxsjt64UrfDTxBhb8cQ.OBoGSaTjZz36FYPujvqu8oXoyxfuxjhK',1);
 
 
 --
 -- Table structure for table `authorities`
 --
 
+
 CREATE TABLE `roles` (
-  `user_id` varchar(50) NOT NULL,
+  `user_id` int NOT NULL,
   `role` varchar(50) NOT NULL,
   UNIQUE KEY `authorities5_idx_1` (`user_id`,`role`),
   CONSTRAINT `authorities5_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `members` (`user_id`)
@@ -48,9 +50,9 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles`
 VALUES
-('john','ROLE_EMPLOYEE'),
-('mary','ROLE_EMPLOYEE'),
-('mary','ROLE_MANAGER'),
-('susan','ROLE_EMPLOYEE'),
-('susan','ROLE_MANAGER'),
-('susan','ROLE_ADMIN');
+(1,'ROLE_EMPLOYEE'),
+(2,'ROLE_EMPLOYEE'),
+(2,'ROLE_MANAGER'),
+(3,'ROLE_EMPLOYEE'),
+(3,'ROLE_MANAGER'),
+(3,'ROLE_ADMIN');
